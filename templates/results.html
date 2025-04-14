@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voting Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="results-table">
+        <h2>Candidate Vote Counts</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Candidate</th>
+                    <th>Votes</th>
+                    <th>Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if total_votes > 0 %}
+                    {% set highest = vote_counts.values()|list|max %}
+                {% else %}
+                    {% set highest = 0 %}
+                {% endif %}
+                
+                {% for candidate in candidates %}
+                    {% if total_votes > 0 %}
+                        {% set candidate_percent = (vote_counts[candidate] / total_votes * 100) %}
+                    {% else %}
+                        {% set candidate_percent = 0 %}
+                    {% endif %}
+                    
+                    <tr {% if vote_counts[candidate] == highest and highest > 0 %}class="highest-votes"{% endif %}>
+                        <td>{{ candidate }}</td>
+                        <td>{{ vote_counts[candidate] }}</td>
+                        <td>
+                            {% if total_votes > 0 %}
+                                {{ "%.2f"|format(candidate_percent) }}%
+                            {% else %}
+                                0%
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p>Total Votes: {{ total_votes }}</p>
+    </div>
+    <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
+</body>
+</html>

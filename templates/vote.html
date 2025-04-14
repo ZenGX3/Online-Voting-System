@@ -1,0 +1,36 @@
+<!-- templates/vote.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title class="heads">Cast Your Vote</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Cast Your Vote</h1>
+        
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for message in messages %}
+                        <p class="msg">{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        <form action="{{ url_for('vote') }}" method="post" class="vote-form">
+            <h2>Select Your Candidate</h2>
+            {% for candidate in candidates %}
+                <div class="candidate-option">
+                    <input type="radio" id="{{ candidate }}" name="candidate" value="{{ candidate }}" required>
+                    <label for="{{ candidate }}">{{ candidate }}</label>
+                </div>
+            {% endfor %}
+            <button type="submit">Submit Vote</button>
+        </form>
+        <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
+    </div>
+</body>
+</html>
