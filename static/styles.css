@@ -136,9 +136,7 @@ form button {
 }
 
 .logout-link1 {
-    position: absolute;
-    top: 1050px;
-    left: 585px;
+    
     text-decoration: none;
     color: white;
     transition: 0.2s ease-in-out;
