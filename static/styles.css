@@ -1,11 +1,11 @@
 /* static/styles.css */
 @font-face {
     font-family: Monoid;
-    src: url("fonts/Monoid-Retina.ttf") format("ttf");
+    src: url("fonts/Monoid-Retina.woff") format("woff");
 }
 @font-face {
     font-family: DejaVu Sans Mono;
-    src: url("fonts/DejaVuSansMono.ttf") format("ttf");
+    src: url("fonts/DejaVuSansMono.woff") format("woff");
 }
 
 * {
@@ -136,7 +136,6 @@ form button {
 }
 
 .logout-link1 {
-    
     text-decoration: none;
     color: white;
     transition: 0.2s ease-in-out;
