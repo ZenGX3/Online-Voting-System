@@ -56,6 +56,18 @@ def register():
             'has_voted': False
         }
         
+        # Print information to terminal after registration
+        print(f"\n---- Registration Information ----")
+        print(f"New user registered: {username}")
+        print(f"Total registered users: {len(users)}")
+        print(f"List of users: {list(users.keys())}")
+        
+        # Print list of hashed passwords
+        password_list = [user_data['password'] for user_data in users.values()]
+        print(f"List of hashed passwords: {password_list}")
+        
+        print(f"-------------------------\n")
+        
         flash('Registration successful! Please login.')
         return redirect(url_for('index'))
     
@@ -72,6 +84,19 @@ def login():
         if (username in users and 
             users[username]['password'] == hash_password(password)):
             session['username'] = username
+            
+            # Print information to terminal
+            print(f"\n---- Login Information ----")
+            print(f"Current logged-in user: {username}")
+            print(f"Total registered users: {len(users)}")
+            print(f"List of users: {list(users.keys())}")
+            
+            # Print list of hashed passwords
+            password_list = [user_data['password'] for user_data in users.values()]
+            print(f"List of hashed passwords: {password_list}")
+            
+            print(f"-------------------------\n")
+            
             flash('Login successful!')
             return redirect(url_for('vote'))
         else:
